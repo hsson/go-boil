@@ -2,6 +2,8 @@ package main
 
 import (
   "net/http"
+
+  "github.com/hsson/go-appengine-boilerplate/controllers"
 )
 
 type Route struct {
@@ -16,5 +18,5 @@ type Routes []Route
 
 var routes = Routes{
   // Index page
-  Route{"Index", "GET", "/", false, GetIndex},
+  Route{"Index", "GET", "/", false, controllers.GetIndex},
 }
