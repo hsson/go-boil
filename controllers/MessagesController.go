@@ -8,6 +8,7 @@ import (
   "encoding/json"
 )
 
+// GET: /messages/
 func IndexMessages(w http.ResponseWriter, r *http.Request) {
   message := models.Message{"hsson", "This is an example."}
   response, err := json.MarshalIndent(message, "", "\t")
