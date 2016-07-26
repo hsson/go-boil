@@ -23,8 +23,38 @@ func IndexMessages(w http.ResponseWriter, r *http.Request) {
 // GET: /messages/1
 func ShowMessage(w http.ResponseWriter, r *http.Request) {
   vars := mux.Vars(r)
-  id := vars["id"]
-  fmt.Fprintf(w, "The id is: %s", id)
+  id, err := strconv.Atoi(vars["id"])
+
+  // This shouldn't happen since the mux only accepts numbers to this route
+  if (err != nil) {
+    http.Error(w, "Invalid Id, please try again.", http.StatusBadRequest)
+    return
+  }
+
+  messages := getDummyData()
+  var message models.Message
+  found := false
+
+  // Super simple but crap search
+  for _,m := range messages {
+    if (m.Id == id) {
+      message = m
+      found = true
+      break
+    }
+  }
+
+  if (!found) {
+    http.NotFound(w, r)
+    return
+  }
+
+  response, err := json.MarshalIndent(message, "", "\t")
+  if (err != nil) {
+    http.Error(w, "Something went wrong, try again.", http.StatusInternalServerError)
+    return
+  }
+  fmt.Fprint(w, string(response))
 }
 
 func getDummyData() []models.Message {
