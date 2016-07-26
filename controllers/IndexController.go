@@ -6,6 +6,6 @@ import (
 )
 
 // GET: /
-func GetIndex(w http.ResponseWriter, r *http.Request) {
+func IndexSite(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintf(w, "Hello index!")
 }

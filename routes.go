@@ -18,7 +18,7 @@ type Routes []Route
 
 var routes = Routes{
 	// Index page
-	Route{"Index", "GET", "/", false, controllers.GetIndex},
+	Route{"Index", "GET", "/", false, controllers.IndexSite},
 
 	// Messages
 	Route{"Messages", "GET", "/messages/", false, controllers.IndexMessages},
