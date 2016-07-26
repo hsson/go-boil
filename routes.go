@@ -22,4 +22,5 @@ var routes = Routes{
 
 	// Messages
 	Route{"Messages", "GET", "/messages/", false, controllers.IndexMessages},
+	Route{"Messages", "GET", "/messages/{id:[0-9]+}", false, controllers.ShowMessage},
 }

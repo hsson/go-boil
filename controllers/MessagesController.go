@@ -2,6 +2,7 @@ package controllers
 
 import (
   "github.com/hsson/go-appengine-boilerplate/models"
+  "github.com/gorilla/mux"
 
   "fmt"
   "net/http"
@@ -17,4 +18,11 @@ func IndexMessages(w http.ResponseWriter, r *http.Request) {
     return
   }
   fmt.Fprint(w, string(response))
+}
+
+// GET: /messages/1
+func ShowMessage(w http.ResponseWriter, r *http.Request) {
+  vars := mux.Vars(r)
+  id := vars["id"]
+  fmt.Fprintf(w, "The id is: %s", id)
 }
