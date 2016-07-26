@@ -1,8 +1,9 @@
 package models
 
 type Message struct {
-  Author    string `json:"author"`
-  Message   string `json:"message"`
+  Id        int     `json:"id"`
+  Author    string  `json:"author"`
+  Message   string  `json:"message"`
 }
 
 func (m *Message) GetAuthor() string {
