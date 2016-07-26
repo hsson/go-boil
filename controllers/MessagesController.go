@@ -5,7 +5,6 @@ import (
   "github.com/gorilla/mux"
 
   "strconv"
-  "fmt"
   "net/http"
   "encoding/json"
 )
@@ -17,7 +16,8 @@ func IndexMessages(w http.ResponseWriter, r *http.Request) {
     http.Error(w, "Something went wrong, try again.", http.StatusInternalServerError)
     return
   }
-  fmt.Fprint(w, string(response))
+  w.Header().Set("Content-Type", "application/json")
+  w.Write(response)
 }
 
 // GET: /messages/1
@@ -54,7 +54,8 @@ func ShowMessage(w http.ResponseWriter, r *http.Request) {
     http.Error(w, "Something went wrong, try again.", http.StatusInternalServerError)
     return
   }
-  fmt.Fprint(w, string(response))
+  w.Header().Set("Content-Type", "application/json")
+  w.Write(response)
 }
 
 func getDummyData() []models.Message {
