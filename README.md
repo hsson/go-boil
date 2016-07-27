@@ -1,4 +1,4 @@
-go-appengine-boilerplate
+go-boil
 ========================
 
 **Currently under development**
