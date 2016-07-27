@@ -1,7 +1,7 @@
 package messages
 
 type Message struct {
-  Id        int     `json:"id"`
+  ID        int     `json:"id"`
   Author    string  `json:"author"`
   Message   string  `json:"message"`
 }

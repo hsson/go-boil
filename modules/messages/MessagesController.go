@@ -36,7 +36,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 
   // Super simple but crap search
   for _,m := range messages {
-    if (m.Id == id) {
+    if (m.ID == id) {
       message = m
       found = true
       break
@@ -60,7 +60,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 func getDummyData() []Message {
   data := make([]Message, 10)
   for i := 0; i < 10; i++ {
-    data[i] = Message{Id: i + 1, Author: "Alexander", Message: "Random message " + strconv.Itoa(i + 1)}
+    data[i] = Message{ID: i + 1, Author: "Alexander", Message: "Random message " + strconv.Itoa(i + 1)}
   }
   return data
 }
