@@ -1,7 +1,6 @@
-package controllers
+package messages
 
 import (
-  "github.com/hsson/go-appengine-boilerplate/models"
   "github.com/gorilla/mux"
 
   "strconv"
@@ -32,7 +31,7 @@ func ShowMessage(w http.ResponseWriter, r *http.Request) {
   }
 
   messages := getDummyData()
-  var message models.Message
+  var message Message
   found := false
 
   // Super simple but crap search
@@ -58,10 +57,10 @@ func ShowMessage(w http.ResponseWriter, r *http.Request) {
   w.Write(response)
 }
 
-func getDummyData() []models.Message {
-  data := make([]models.Message, 10)
+func getDummyData() []Message {
+  data := make([]Message, 10)
   for i := 0; i < 10; i++ {
-    data[i] = models.Message{Id: i + 1, Author: "Alexander", Message: "Random message " + strconv.Itoa(i + 1)}
+    data[i] = Message{Id: i + 1, Author: "Alexander", Message: "Random message " + strconv.Itoa(i + 1)}
   }
   return data
 }

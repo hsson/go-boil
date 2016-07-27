@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/hsson/go-appengine-boilerplate/controllers"
+	"github.com/hsson/go-appengine-boilerplate/modules/messages"
 )
 
 type Route struct {
@@ -18,9 +18,9 @@ type Routes []Route
 
 var routes = Routes{
 	// Index page
-	Route{"Index", "GET", "/", false, controllers.IndexSite},
+	Route{"Index", "GET", "/", false, IndexSite},
 
 	// Messages
-	Route{"Messages", "GET", "/messages/", false, controllers.IndexMessages},
-	Route{"Messages", "GET", "/messages/{id:[0-9]+}", false, controllers.ShowMessage},
+	Route{"Messages", "GET", "/messages/", false, messages.IndexMessages},
+	Route{"Messages", "GET", "/messages/{id:[0-9]+}", false, messages.ShowMessage},
 }
