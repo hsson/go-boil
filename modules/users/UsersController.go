@@ -1,9 +1,14 @@
 package users
 
 import (
+  jwt "github.com/dgrijalva/jwt-go"
   "net/http"
   "fmt"
+  "time"
 )
+
+// A secret key for signing tokens
+const tokenSecretKey string = "super-secret-key"
 
 // POST: /users/sign_in
 func SignIn(w http.ResponseWriter, r *http.Request) {
@@ -22,5 +27,21 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
     return
   }
 
-  fmt.Fprintf(w, "Successfully signed in %s\n", user.Name)
+  // Sign in is successfull, generate JWT
+  token := jwt.New(jwt.SigningMethodHS256)
+  token.Claims = map[string]interface{} {
+    "username": user.Username,
+    "name": user.Name,
+    "iat": time.Now().Unix(),
+    "exp": time.Now().Add(24 * 30 * time.Hour).Unix(),
+  }
+
+  tokenString, err := token.SignedString([]byte(tokenSecretKey))
+  if (err != nil) {
+    fmt.Fprintln(w, err)
+    http.Error(w, "Something went wrong, try again", http.StatusInternalServerError)
+    return
+  }
+
+  fmt.Fprint(w, tokenString)
 }
