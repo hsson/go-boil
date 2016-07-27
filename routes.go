@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/hsson/go-boil/modules/users"
 	"github.com/hsson/go-boil/modules/messages"
 )
 
@@ -19,6 +20,9 @@ type Routes []Route
 var routes = Routes{
 	// Index page
 	Route{"Index", "GET", "/", false, IndexSite},
+
+	// Users
+	Route{"Users", "POST", "/users/sign_in", false, users.SignIn},
 
 	// Messages
 	Route{"Messages", "GET", "/messages/", false, messages.Index},
