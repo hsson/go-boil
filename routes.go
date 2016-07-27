@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/hsson/go-appengine-boilerplate/modules/messages"
+	"github.com/hsson/go-boil/modules/messages"
 )
 
 type Route struct {
