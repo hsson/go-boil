@@ -9,7 +9,7 @@ import (
 )
 
 // GET: /messages/
-func IndexMessages(w http.ResponseWriter, r *http.Request) {
+func Index(w http.ResponseWriter, r *http.Request) {
   response, err := json.MarshalIndent(getDummyData(), "", "\t")
   if (err != nil) {
     http.Error(w, "Something went wrong, try again.", http.StatusInternalServerError)
@@ -20,7 +20,7 @@ func IndexMessages(w http.ResponseWriter, r *http.Request) {
 }
 
 // GET: /messages/1
-func ShowMessage(w http.ResponseWriter, r *http.Request) {
+func Show(w http.ResponseWriter, r *http.Request) {
   vars := mux.Vars(r)
   id, err := strconv.Atoi(vars["id"])
 
