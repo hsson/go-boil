@@ -5,18 +5,11 @@ import (
 
   "strconv"
   "net/http"
-  "encoding/json"
 )
 
 // GET: /messages/
 func Index(w http.ResponseWriter, r *http.Request) {
-  response, err := json.MarshalIndent(getDummyData(), "", "\t")
-  if (err != nil) {
-    http.Error(w, "Something went wrong, try again.", http.StatusInternalServerError)
-    return
-  }
-  w.Header().Set("Content-Type", "application/json")
-  w.Write(response)
+  printJSON(getDummyData(), w)
 }
 
 // GET: /messages/1
@@ -31,36 +24,12 @@ func Show(w http.ResponseWriter, r *http.Request) {
   }
 
   messages := getDummyData()
-  var message Message
-  found := false
+  message, err := getMessagesByID(messages, id)
 
-  // Super simple but crap search
-  for _,m := range messages {
-    if (m.ID == id) {
-      message = m
-      found = true
-      break
-    }
-  }
-
-  if (!found) {
+  if (err != nil) {
     http.NotFound(w, r)
     return
   }
 
-  response, err := json.MarshalIndent(message, "", "\t")
-  if (err != nil) {
-    http.Error(w, "Something went wrong, try again.", http.StatusInternalServerError)
-    return
-  }
-  w.Header().Set("Content-Type", "application/json")
-  w.Write(response)
-}
-
-func getDummyData() []Message {
-  data := make([]Message, 10)
-  for i := 0; i < 10; i++ {
-    data[i] = Message{ID: i + 1, Author: "Alexander", Message: "Random message " + strconv.Itoa(i + 1)}
-  }
-  return data
+  printJSON(message, w)
 }
